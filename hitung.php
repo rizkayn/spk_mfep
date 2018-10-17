@@ -144,19 +144,15 @@ else:
             
 
             <td class="text-primary"><?=$val?></td>
-        </tr>                           
-        <?php 
-        $db->query("UPDATE tb_alternatif SET total='$total[$key]', rank='$val' WHERE kode_alternatif='$key'");
-        endforeach ?>
-
-            <td> <?php
+            
+        <td> <?php
            // $stmt3x2 = $db->prepare("select sum(bobot_alternatif_kriteria) as bak from smart_alternatif_kriteria where id_alternatif='".$rowx['id_alternatif']."'");
              //   $stmt3x2->execute();
                // $row3x2 = $stmt3x2->fetch();
                 //$ideas = $rowx['id_alternatif'];
                 //echo $hsl = $row3x2['bak'];
 
-            if($total==100){
+            if(round($total[$key], 3)==100){
                     $ket = "Lulus";
                 } else{
                     $ket = "Tidak Lulus";
@@ -167,9 +163,16 @@ else:
                 //$stmt2x3y->bindParam(2,$ket);
                 //$stmt2x3y->bindParam(3,$ideas);
                 //$stmt2x3y->execute();
+                    echo  $ket;
                 ?>
 
             </td>
+            </tr>           
+        <?php 
+        $db->query("UPDATE tb_alternatif SET total='$total[$key]', rank='$val' WHERE kode_alternatif='$key'");
+        endforeach ?>
+
+           
         </table>        
     </div>          
     <div class="panel-body">
